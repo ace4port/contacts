@@ -1,0 +1,95 @@
+.contact {
+  background-color: rgb(255, 255, 255);
+  padding: 0 1rem;
+  font-family: 'Lato';
+
+  &--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .icons {
+      display: flex;
+      .icon {
+        padding-left: 14px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 960px) {
+    width: 33vw;
+    height: 100%;
+    float: right;
+    padding: 0 2rem;
+  }
+  @media screen and (max-width: 960px) {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 350px) {
+    height: 100%;
+  }
+}
+
+.contact-verify {
+  @extend .contact;
+  min-height: 100%;
+
+  .icons {
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+  .head {
+    padding: 3rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > .name {
+      font-size: 28px;
+    }
+  }
+
+  .divider {
+    margin: 10px 25px;
+    border-top: 1px solid rgba(54, 56, 101, 1);
+  }
+
+  .property {
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+
+    .icon {
+      padding: 0 5px;
+    }
+    .text {
+      font-size: 18px;
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .buttons {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    // .btn {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 13px;
+  }
+}
