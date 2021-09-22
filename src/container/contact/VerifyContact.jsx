@@ -1,17 +1,22 @@
 import React from 'react'
-import Button from '../components/Button'
-import Avatar from '../components/Avatar'
-import EditIcon from '../components/icons/Edit'
-import CloseIcon from '../components/icons/Close'
-import MailIcon from '../components/icons/Mail'
-import PhoneIcon from '../components/icons/Phone'
+import Button from '../../components/Button'
+import Avatar from '../../components/Avatar'
+import EditIcon from '../../components/icons/Edit'
+import CloseIcon from '../../components/icons/Close'
+import MailIcon from '../../components/icons/Mail'
+import PhoneIcon from '../../components/icons/Phone'
 
-const Addcontacts = ({ name = 'Tushar T Bohara', mail = 'Tushar.bohara@oxygenmedia.com', phone = '+216 XXX XXX' }) => {
+const Addcontacts = ({
+  name = 'Tushar T Bohara',
+  mail = 'Tushar.bohara@oxygenmedia.com',
+  phone = '+216 XXX XXX',
+  setScreen,
+}) => {
   return (
-    <div className="contact-verify">
+    <div className="contact-view">
       <div className="icons">
-        <EditIcon />
-        <CloseIcon />
+        <EditIcon onClick={() => setScreen('edit')} />
+        <CloseIcon className="icon2" onClick={() => setScreen('main')} />
       </div>
 
       <div className="head">
@@ -29,12 +34,12 @@ const Addcontacts = ({ name = 'Tushar T Bohara', mail = 'Tushar.bohara@oxygenmed
       </div>
 
       <div className="buttons">
-          <Button variant="outlined" size="small">
-            Cancel
-          </Button>
-          <Button variant="secondary" size="default">
-            Save
-          </Button>
+        <Button variant="outlined" size="small" onClick={() => setScreen('main')}>
+          Cancel
+        </Button>
+        <Button variant="secondary" size="default" onClick={() => setScreen('view')}>
+          Save
+        </Button>
       </div>
     </div>
   )

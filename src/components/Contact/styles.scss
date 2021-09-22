@@ -1,15 +1,21 @@
 // @import  ~styles/main.scss ;
 
 .contact-item {
-  display: flex;
-
   margin: 4px 0;
   background-color: rgba(250, 251, 255, 1);
+  display: flex;
   align-items: center;
+  flex-flow: row wrap;
   justify-content: space-between;
+  &-av {
+    padding-right: 22px;
+  }
 
-  p {
-    align-self: flex-start;
+  &-name {
+    flex-grow: 1;
+  }
+  &-av {
+    // flex-grow: 1;
   }
 
   @media screen and (min-width: 960px) {

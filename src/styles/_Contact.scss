@@ -1,6 +1,10 @@
 .contact {
   background-color: rgb(255, 255, 255);
-  padding: 0 1rem;
+  height: calc(100vh - 60px);
+  width: 100%;
+  position: absolute;
+
+  padding: 0 0 0 1rem;
   font-family: 'Lato';
 
   &--header {
@@ -16,23 +20,22 @@
     .icons {
       display: flex;
       .icon {
-        padding-left: 14px;
+        padding-right: 14px;
       }
     }
   }
 
   @media screen and (min-width: 960px) {
+    position: relative;
     width: 33vw;
-    height: 100%;
+    // height: 100%;
     float: right;
     padding: 0 2rem;
   }
   @media screen and (max-width: 960px) {
-    height: 100%;
-
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
 
   @media screen and (max-width: 350px) {
@@ -42,15 +45,14 @@
 
 .contact-verify {
   @extend .contact;
-  min-height: 100%;
 
   .icons {
     position: absolute;
     right: 10px;
-    top: 0;
+    bottom: 18;
   }
   .head {
-    padding: 3rem 0 1rem 0;
+    padding: 3rem 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,11 +60,13 @@
 
     > .name {
       font-size: 28px;
+      margin: 0;
     }
   }
 
   .divider {
-    margin: 10px 25px;
+    margin: 20px 25px;
+    border: none;
     border-top: 1px solid rgba(54, 56, 101, 1);
   }
 
@@ -84,12 +88,66 @@
   }
 
   .buttons {
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    // .btn {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 13px;
+    padding-bottom: 13px;
+  }
+}
+
+.contact-view {
+  @extend .contact-verify;
+
+  .icons {
+    margin: 18px 12px;
+    .icon2 {
+      margin-left: 10px;
+    }
+  }
+  .av-foot {
+    position: relative;
+    left: 36px;
+    top: -12px;
+  }
+}
+
+.contact-add {
+  @extend .contact-view;
+  fieldset {
+    border: none;
+  }
+
+  .details {
+    padding: 0 0 3px 10px;
+    border-bottom: 1px solid $primary;
+  }
+
+  .input {
+    display: block;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    @include dimension(42px, 270px);
+
+    border: 1px solid rgba(218, 218, 218, 1);
+
+    padding: 12px 20px;
+    font: 14px 500 inherit;
+  }
+  .intl-tel-input,
+  .tel-wrapper {
+    border-radius: 10px;
+    margin-bottom: 5px;
+    input {
+      @extend .input;
+    }
+    .flag-container {
+      padding-left: 2px;
+    }
+  }
+
+  .add {
+    background-color: rgba(152, 167, 197, 1);
+    border-radius: 24px;
+    padding: 0 10px;
+    width: fit-content;
   }
 }
