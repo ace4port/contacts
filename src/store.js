@@ -4,7 +4,7 @@ import contactReducer from './features/contact/contactSlice'
 // import { persistStore, persistReducer } from 'redux-persist'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants'
+// import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants'
 
 const reducers = combineReducers({ contact: contactReducer })
 
@@ -16,9 +16,9 @@ export const store = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
   middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
+    serializableCheck: false,
+    // ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    // },
   }),
 })
 

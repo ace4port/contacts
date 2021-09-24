@@ -4,8 +4,16 @@ import PhoneIcon from './icons/Phone'
 import SliderIcon from './icons/Slider'
 
 const Tooltip = ({ filterEmail, filterPhone, filterAvailable, setFilterEmail, setFilterPhone, setFilterAvailable }) => {
+  const modal = document.getElementById('')
+  window.onClick = function (e)  {
+    if(e.target === modal) {
+      modal.style.display = 'none'
+    } else {
+      modal.style.display = 'block'}
+  }
+
   return (
-    <div className="tooltipContain">
+    <div className="tooltipContain modal">
       <div className="tooltip">
         <div className="tooltip--av">
           Only availables

@@ -25,7 +25,7 @@ const ViewContact = ({ setScreen }) => {
           <div className="head">
             <Avatar variant="large" label={contact.first_name[0]} />
             <div className="av-foot">
-              <Availability active={contact.availability} />
+              <Availability active={contact.is_available} />
             </div>
             <p className="name">{`${contact.first_name} ${contact.mid_name} ${contact.last_name}`}</p>
           </div>
@@ -34,14 +34,14 @@ const ViewContact = ({ setScreen }) => {
 
           <div>
             {contact.emails[0] ? (
-              contact.emails.map((data) => <Property type="mail" data={data} />)
+              contact.emails.map((data,i) => <Property key={i} type="mail" data={data} />)
             ) : contact.emails[0] === '' ? (
-              contact.emails.map((data) => <Property type="mail" data={data} />)
+              contact.emails.map((data,i ) => <Property key={i} type="mail" data={data} />)
             ) : (
               <h4>No emails for this contact</h4>
             )}
             {contact.phones[0]?.phone ? (
-              contact.phones.map((data) => <Property type="phone" data={data.phone} label={data.label} />)
+              contact.phones.map((data, i) => <Property key={i} type="phone" data={data.phone} label={data.label} />)
             ) : (
               <h4>No phone numbers for this contact</h4>
             )}

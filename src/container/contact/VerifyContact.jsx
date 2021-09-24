@@ -7,12 +7,14 @@ import MailIcon from '../../components/icons/Mail'
 import PhoneIcon from '../../components/icons/Phone'
 
 import { useSelector } from 'react-redux'
-import {  contactEdits, contactView, create, edit, success } from '../../features/contact/contactSlice'
+import {  contactEdits, contactView, create, edit, loading as load, success as scs } from '../../features/contact/contactSlice'
 import { useDispatch } from 'react-redux'
 
 const Addcontacts = ({ setScreen }) => {
-  let contact = useSelector(contactView)
-  let contactE = useSelector(contactEdits)
+  const contact = useSelector(contactView)
+  const contactE = useSelector(contactEdits)
+  const loading = useSelector(load)
+  const success = useSelector(scs)
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
@@ -26,7 +28,7 @@ const Addcontacts = ({ setScreen }) => {
     } 
   }
 
-  const firstLetter = contact.first_name[0] || 'X'
+  const firstLetter = contact.first_name ?  contact.first_name[0] : 'X'
 
   console.log(contact.emails)
   return (
@@ -44,12 +46,14 @@ const Addcontacts = ({ setScreen }) => {
       <hr className="divider" />
 
       <div>
-        {contact.emails[0] ? (
+        {loading && <h3>Loading ...</h3>}
+        {success && contact.emails.length ? (
           contact.emails.map((data) => <Property type="mail" data={data} />)
         ) : (
           <h4>No emails for this contact</h4>
         )}
-        {contact.phones[0].phone ? (
+
+        {success && contact.phones[0].phone ? (
           contact.phones.map((data) => <Property type="phone" data={data.phone} label={data.label} />)
         ) : (
           <h4>No phone numbers for this contact</h4>

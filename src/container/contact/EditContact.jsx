@@ -30,7 +30,7 @@ const EditContact = ({ setScreen }) => {
         first_name: formdata.firstName,
         mid_name: formdata.midName,
         last_name: formdata.lastName,
-        emails: emails.map(data => data),
+        emails: emails.map((data) => data),
         phones,
       })
     ).then(setScreen('verify'))
@@ -133,7 +133,7 @@ const EmailInput = (props) => {
     <div>
       <p className="details">Email</p>
       {emailList.map((x, i) => (
-        <div>
+        <div key={i}>
           <input
             type="email"
             name="email"
@@ -196,7 +196,8 @@ const PhoneInput = (props) => {
           />
           <div>
             <label htmlFor="label">Label: </label>
-            <select name="label" className="input" id="label" onChange={(e) => handleLabelChange(e, i)}>
+            <select name="label" className="input" id="label" defaultValue={toString(x.value)} onChange={(e) => handleLabelChange(e, i)}>
+              <option disabled hidden value=""></option>
               <option value="home">Home</option>
               <option value="mobile">Mobile</option>
               <option value="work">Work</option>

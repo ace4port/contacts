@@ -25,7 +25,7 @@ const CreateContact = ({ setScreen }) => {
         first_name: formdata.firstName,
         mid_name: formdata.midName,
         last_name: formdata.lastName,
-        emails: emails.map(data => data.email),
+        emails: emails.map((data) => data.email),
         phones: phones,
       })
     ).then(setScreen('verify'))
@@ -141,7 +141,7 @@ export const EmailInput = (props) => {
       <p className="details">Email</p>
 
       {emailList.map((x, i) => (
-        <div>
+        <div key={i}>
           <input
             type="email"
             name="email"
@@ -159,16 +159,11 @@ export const EmailInput = (props) => {
 }
 
 export const PhoneInput = (props) => {
-  // const init_id = props.id ? props.id : ''
-  const init_phone = props.phone ? props.phone : ''
-  const init_label = props.label ? props.label : 'Home'
-  const [phoneList, setPhoneList] = useState([{ phone: init_phone, label: init_label }])
+  const [phoneList, setPhoneList] = useState([{ phone: '', label: '' }])
 
   const handlePhoneChange = (f, i) => {
-    // const {name, value} = e.target
     const list = [...phoneList]
     list[i]['phone'] = f
-    // list[i]['id'] = i
     setPhoneList(list)
   }
 
@@ -186,7 +181,7 @@ export const PhoneInput = (props) => {
   }
 
   const handleAdd = () => {
-    setPhoneList([...phoneList, { phone: '', label: 'Home' }])
+    setPhoneList([...phoneList, { phone: '', label: '' }])
   }
   props.func(phoneList)
   // console.log(JSON.stringify(phoneList))
@@ -205,13 +200,14 @@ export const PhoneInput = (props) => {
           />
           <div>
             <label htmlFor="label">Label: </label>
-            <select name="label" className="input" id="label" onChange={(e) => handleLabelChange(e, i)}>
+            <select name="label" className="input" id="label"  onChange={(e) => handleLabelChange(e, i)}>
+              <option disabled hidden value=""></option>
               <option value="home">Home</option>
               <option value="mobile">Mobile</option>
               <option value="work">Work</option>
               <option value="main">Main</option>
               <option value="fax">Fax</option>
-              <option value="other">Custom</option>
+              <option value="other">Other</option>
             </select>
           </div>
           {phoneList.length !== 1 && <CloseIcon onClick={handleRemove} />}

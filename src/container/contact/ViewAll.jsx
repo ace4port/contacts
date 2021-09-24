@@ -54,6 +54,7 @@ const ViewAll = ({ setScreen }) => {
                 value={search}
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
+                autoComplete='off'
               />
               <button className="btn--icon__search">
                 <SeachIcon />
@@ -80,7 +81,7 @@ const ViewAll = ({ setScreen }) => {
           </div>
         )}
       </div>
-      <div className={`back ${showTooltip ? 'blur' : ''}`}>
+      <div className={`back`}>
         {loading && <h4>Loading ...</h4>}
         {success && searchbar
           ? contacts
@@ -95,17 +96,18 @@ const ViewAll = ({ setScreen }) => {
               .filter((val) => (!filterPhone ? val : val.phones.length && val))
               .filter((val) => (!filterAvailable ? val : val.is_available && val))
               .map((data) => (
-                <Contact
-                  name={`${data.first_name} ${data.last_name}`}
-                  active={data.availability}
-                  onClick={() => dispatch(getOne(data.id)).then(unwrapResult).then(setScreen('view'))}
-                  key={data.id}
-                />
+                <div className={`${showTooltip ? 'blur' : ''}`} key={data.id}>
+                  <Contact
+                    name={`${data.first_name} ${data.last_name}`}
+                    active={data.is_available}
+                    onClick={() => dispatch(getOne(data.id)).then(unwrapResult).then(setScreen('view'))}
+                  />
+                </div>
               ))
           : contacts.map((data) => (
               <Contact
                 name={`${data.first_name} ${data.last_name}`}
-                active={data.availability}
+                active={data.is_available}
                 onClick={() => dispatch(getOne(data.id)).then(unwrapResult).then(setScreen('view'))}
                 key={data.id}
               />

@@ -59,12 +59,12 @@ export const remove = createAsyncThunk('contacts/delete', async (id) => {
 })
 
 export const verify = createAsyncThunk('contacts/verify', async (formdata) => {
-  console.log('Veriy create', formdata)
+  // console.log('Veriy create', formdata)
   return formdata
 })
 
 export const verifyEdit = createAsyncThunk('contacts/verify/edit', async (formdata) => {
-  console.log('Verify Edit', formdata)
+  // console.log('Verify Edit', formdata)
   return formdata
 })
 
@@ -106,10 +106,16 @@ const contactSlice = createSlice({
       .addCase(getOne.rejected, (state) => {
         state.isLoading = false
       })
-      .addCase(verify.fulfilled, (state, action) => {
+      .addCase(verify.pending, (state, action) => {
         // console.log('Create Verfiy fulfilled', action.payload)
-        state.contactOne = action.payload
+        state.loading = true
+        state.success = false
+      })
+      .addCase(verify.fulfilled, (state, action) => {
+        state.loading = false
+        state.success = true
         state.contactView = action.payload
+        state.contactOne = action.payload
       })
       .addCase(verifyEdit.fulfilled, (state, action) => {
         state.contactEdit = action.payload
