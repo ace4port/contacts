@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import MailIcon from './icons/Mail'
 import PhoneIcon from './icons/Phone'
 import SliderIcon from './icons/Slider'
