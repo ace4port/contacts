@@ -7,22 +7,35 @@ import AddIcon from '../../components/icons/Add'
 import MailIcon from '../../components/icons/Mail'
 import PhoneIcon from '../../components/icons/Phone'
 import CloseIcon from '../../components/icons/Close'
+import { verify } from '../../features/contact/contactSlice'
+import { useDispatch } from 'react-redux'
 
 const CreateContact = ({ setScreen }) => {
   const [formdata, setFormdata] = useState({ firstName: '', lastName: '', midName: '' })
   const [emails, setEmails] = useState([])
   const [phones, setPhones] = useState([])
 
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('form submitted', 'Formdata:', formdata, 'Emails: ',emails, 'Phones', phones)
+    console.log('form submitted', 'Formdata:', formdata, 'Emails: ', emails, 'Phones', phones)
+    dispatch(
+      verify({
+        first_name: formdata.firstName,
+        mid_name: formdata.midName,
+        last_name: formdata.lastName,
+        emails: emails.map(data => data.email),
+        phones: phones,
+      })
+    ).then(setScreen('verify'))
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormdata({ ...formdata, [name]: value })
   }
-  console.log(formdata)
+  // console.log(formdata)
 
   const email_list = (data) => {
     setEmails(data)
@@ -33,7 +46,7 @@ const CreateContact = ({ setScreen }) => {
   return (
     <div className="contact-add">
       <div className="contact--header">
-        <p>Add Contact</p>
+        <p className="header">Add Contact</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -90,24 +103,26 @@ const CreateContact = ({ setScreen }) => {
 
 export default CreateContact
 
-const AddBtn = ({ type, ...props }) => {
+export const AddBtn = ({ type, ...props }) => {
   return (
-    <div className="add" {...props}>
-      <AddIcon />
-      {type === 'mail' && <MailIcon />}
-      {type === 'phone' && <PhoneIcon />}
+    <div className="addContain">
+      <div className="add" {...props}>
+        <AddIcon />
+        {type === 'mail' && <MailIcon variant="outlined" />}
+        {type === 'phone' && <PhoneIcon variant="outlined" />}
+      </div>
     </div>
   )
 }
 
-const EmailInput = (props) => {
-  const [emailList, setEmailList] = useState([{ id: '', email: '' }])
+export const EmailInput = (props) => {
+  const init_email = props.email ? props.email : ''
+  const [emailList, setEmailList] = useState([{ email: init_email }])
 
   const handleChange = (e, i) => {
     const val = e.target.value
     const list = [...emailList]
     list[i]['email'] = val
-    list[i]['id'] = i
     setEmailList(list)
   }
 
@@ -117,7 +132,7 @@ const EmailInput = (props) => {
     setEmailList(list)
   }
   const handleAdd = () => {
-    setEmailList([...emailList, { id: '', email: '' }])
+    setEmailList([...emailList, { email: '' }])
   }
   props.func(emailList)
   // console.log(JSON.stringify(emailList))
@@ -143,14 +158,17 @@ const EmailInput = (props) => {
   )
 }
 
-const PhoneInput = (props) => {
-  const [phoneList, setPhoneList] = useState([{ id: '', phone: '', label: 'Home' }])
+export const PhoneInput = (props) => {
+  // const init_id = props.id ? props.id : ''
+  const init_phone = props.phone ? props.phone : ''
+  const init_label = props.label ? props.label : 'Home'
+  const [phoneList, setPhoneList] = useState([{ phone: init_phone, label: init_label }])
 
   const handlePhoneChange = (f, i) => {
     // const {name, value} = e.target
     const list = [...phoneList]
     list[i]['phone'] = f
-    list[i]['id'] = i
+    // list[i]['id'] = i
     setPhoneList(list)
   }
 
@@ -168,7 +186,7 @@ const PhoneInput = (props) => {
   }
 
   const handleAdd = () => {
-    setPhoneList([...phoneList, { id: '', phone: '', label: 'Home' }])
+    setPhoneList([...phoneList, { phone: '', label: 'Home' }])
   }
   props.func(phoneList)
   // console.log(JSON.stringify(phoneList))
@@ -197,7 +215,7 @@ const PhoneInput = (props) => {
             </select>
           </div>
           {phoneList.length !== 1 && <CloseIcon onClick={handleRemove} />}
-          {phoneList.length - 1 === i && <AddBtn type="mail" onClick={handleAdd} />}
+          {phoneList.length - 1 === i && <AddBtn type="phone" onClick={handleAdd} />}
         </div>
       ))}
     </div>

@@ -1,7 +1,40 @@
+.header {
+  font-family: 'Lato';
+  color: #363865;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+}
+
+.input {
+  // display: block;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  @include dimension(42px, 270px);
+
+  border: 1px solid rgba(218, 218, 218, 1);
+
+  padding: 12px 20px;
+  font: 14px 500 inherit;
+}
+
+.btn {
+  cursor: pointer;
+  &--icon {
+    &__search {
+      position: absolute;
+      right: 100px;
+      top: 16px;
+      border-radius: 10px;
+      background-color: inherit;
+      padding: 5px;
+      border: none;
+    }
+  }
+}
+
 .contact {
   background-color: rgb(255, 255, 255);
-  height: calc(100vh - 60px);
-  width: 100%;
   position: absolute;
 
   padding: 0 0 0 1rem;
@@ -11,35 +44,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    p {
-      font-size: 24px;
-      font-weight: 500;
+  }
+  .icons {
+    display: flex;
+    .icon {
+      padding: 7px;
     }
+  }
+  &--header2 {
+    padding: 16px 0 0;
+    display: flex;
+    align-items: center;
 
-    .icons {
-      display: flex;
-      .icon {
-        padding-right: 14px;
-      }
+    .input {
+      @include dimension(36px, 230px);
     }
+  }
+
+  .back {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .blur {
+    filter: blur(1px);
   }
 
   @media screen and (min-width: 960px) {
     position: relative;
     width: 33vw;
-    // height: 100%;
+    // height: calc(100vh - 60px);
     float: right;
     padding: 0 2rem;
   }
   @media screen and (max-width: 960px) {
-    height: 100vh;
+    // height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
   }
 
   @media screen and (max-width: 350px) {
-    height: 100%;
+    // height: 120%;
   }
 }
 
@@ -121,17 +166,6 @@
     border-bottom: 1px solid $primary;
   }
 
-  .input {
-    display: block;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    @include dimension(42px, 270px);
-
-    border: 1px solid rgba(218, 218, 218, 1);
-
-    padding: 12px 20px;
-    font: 14px 500 inherit;
-  }
   .intl-tel-input,
   .tel-wrapper {
     border-radius: 10px;
@@ -144,10 +178,19 @@
     }
   }
 
+  .addContain {
+    float: right;
+  }
+
   .add {
-    background-color: rgba(152, 167, 197, 1);
+    display: flex;
+    align-items: center;
+    justify-self: center;
+
+    background-color: #98a7c5;
     border-radius: 24px;
     padding: 0 10px;
-    width: fit-content;
+    height: 32px;
+    width: 80px;
   }
 }
